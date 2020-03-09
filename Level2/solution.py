@@ -15,28 +15,23 @@ def solution(n, b):
         cycle_length = check_cycle_length(n, new_id, id_array)
         if cycle_length:
             return cycle_length
+
         id_array.append(new_id)
 
-    return len(id_array)
 
-
-def check_cycle_length(original_id, last_id, id_array):
-    if last_id is id_array[-1]:
+def check_cycle_length(original_id, new_id, id_array):
+    if new_id == id_array[-1]:
         return 1
-    if last_id in id_array[:-1]:
-        return len(id_array) - id_array.index(last_id)
-
-    return False
+    if new_id in id_array[:-1]:
+        return len(id_array) - id_array.index(new_id)
+    return 0
 
 
 def calculate_new_id(previous_id, length_of_id, base):
     x, y = _get_x_and_y(previous_id)
     difference = calculate_difference(x, y, base)
-
-    if len(difference) == length_of_id:
-        pass
-        # if length not equal to length pad with zeroes
-    return difference
+    padded_difference = difference.zfill(length_of_id)
+    return padded_difference
 
 
 def calculate_difference(x, y, base):
@@ -80,5 +75,5 @@ def convert_base_10_int_to_base(number, base):
 
 
 if __name__ == '__main__':
-    length = solution('210022', 3)
+    length = solution('1211', 10)
     print('length ------ ', length)
