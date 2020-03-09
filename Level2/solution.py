@@ -1,39 +1,40 @@
 import string
-digs = string.digits + string.ascii_letters
 
 
 def solution(n, b):
-    length_of_id = len(n)
+    id_length = len(n)
     id_array = [n]
     cycled = False
 
     while not cycled:
-        next_id = calculate_next_id(id_array[-1], length_of_id, b)
-        print(next_id)
-        if int(next_id) is 0:
+        next_id = calculate_next_id(id_array[-1], id_length, b)
+
+        if int(next_id) == 0:
             return 1
 
-        cycle_length = check_cycle_length(n, next_id, id_array)
+        cycle_length = get_cycle_length(next_id, id_array)
         if cycle_length:
             return cycle_length
 
         id_array.append(next_id)
 
 
-def check_cycle_length(original_id, next_id, id_array):
+def get_cycle_length(next_id, id_array):
+    # return 1 if loop becomes stuck on a contstent
     if next_id == id_array[-1]:
         return 1
+    # check if value has already appeared, indicating a loop
     if next_id in id_array[:-1]:
         return len(id_array) - id_array.index(next_id)
     return 0
 
 
-def calculate_next_id(previous_id, length_of_id, base):
+def calculate_next_id(previous_id, id_length, base):
     x, y = get_x_and_y(previous_id, base)
 
     difference = calculate_difference(x, y, base)
 
-    padded_difference = difference.zfill(length_of_id)
+    padded_difference = difference.zfill(id_length)
 
     return padded_difference
 
@@ -58,8 +59,10 @@ def _get_x_and_y_base_10(x, y, base):
 def _get_x_and_y_strings(previous_id):
     digits = list(str(previous_id))
     sorted_digits = sorted(digits)
+
     y = ''.join(sorted_digits)
     x = y[::-1]
+
     return x, y
 
 
@@ -68,28 +71,26 @@ def _calculate_difference_in_base_10(x_base_10, y_base_10, base):
 
 
 def _convert_base_10_int_to_base_n_string(number, base):
-    if number < 0:
-        sign = -1
-    elif number == 0:
-        return digs[0]
-    else:
-        sign = 1
+    # Don't need to worry about negative numbers as
+    # n is nonnegative
+    # x will always be larger than y
+    digs = string.digits
 
-    number *= sign
+    if number == 0:
+        return digs[0]
+
     digits = []
 
     while number:
-        digits.append(digs[int(number % base)])
+        digits.append(
+            digs[int(number % base)]
+        )
         number = int(number / base)
 
-    if sign < 0:
-        digits.append('-')
-
     digits.reverse()
-
     return ''.join(digits)
 
 
 if __name__ == '__main__':
-    length = solution('1211', 10)
+    length = solution('210022', 3)
     print('length ------ ', length)

@@ -1,5 +1,5 @@
 import unittest
-from Level2.solution import solution, check_cycle_length, _get_x_and_y_strings, _convert_base_10_int_to_base_n_string
+from Level2.solution import solution, get_cycle_length, _get_x_and_y_strings, _convert_base_10_int_to_base_n_string
 
 
 class TestSolution(unittest.TestCase):
@@ -9,15 +9,15 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(solution('1211', 10), 1)
 
     def test_check_cycle_length_repeating_constant(self):
-        self.assertEquals(check_cycle_length(12345, 45, [21, 35, 45]), 1)
+        self.assertEquals(get_cycle_length(45, [21, 35, 45]), 1)
 
     def test_check_cycle_no_cycle(self):
-        self.assertEquals(check_cycle_length(12345, 46, [21, 35, 45]), 0)
+        self.assertEquals(get_cycle_length(46, [21, 35, 45]), 0)
 
     def test_check_cycle_cycle(self):
-        self.assertEquals(check_cycle_length(12345, 46, [46, 35, 45]), 3)
-        self.assertEquals(check_cycle_length(12345, 46, [46, 45]), 2)
-        self.assertEquals(check_cycle_length(12345, 46, [46, 45, 5, 3]), 4)
+        self.assertEquals(get_cycle_length(46, [46, 35, 45]), 3)
+        self.assertEquals(get_cycle_length(46, [46, 45]), 2)
+        self.assertEquals(get_cycle_length(46, [882, 1, 35, 46, 45, 5, 3]), 4)
 
     def test_get_x_and_y(self):
         self.assertEquals(_get_x_and_y_strings(
