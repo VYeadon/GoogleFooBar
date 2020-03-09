@@ -1,5 +1,5 @@
 import unittest
-from Level2.solution import solution, check_cycle_length
+from Level2.solution import solution, check_cycle_length, _get_x_and_y_strings, _convert_base_10_int_to_base_n_string
 
 
 class TestSolution(unittest.TestCase):
@@ -18,3 +18,17 @@ class TestSolution(unittest.TestCase):
         self.assertEquals(check_cycle_length(12345, 46, [46, 35, 45]), 3)
         self.assertEquals(check_cycle_length(12345, 46, [46, 45]), 2)
         self.assertEquals(check_cycle_length(12345, 46, [46, 45, 5, 3]), 4)
+
+    def test_get_x_and_y(self):
+        self.assertEquals(_get_x_and_y_strings(
+            44572110), ("75442110", "01124457"))
+
+    def test_convert_base_10_int_to_base(self):
+        self.assertEquals(_convert_base_10_int_to_base_n_string(24, 3), "220")
+        self.assertEquals(_convert_base_10_int_to_base_n_string(89, 4), "1121")
+        self.assertEquals(
+            _convert_base_10_int_to_base_n_string(5000, 5), "130000")
+        self.assertEquals(
+            _convert_base_10_int_to_base_n_string(239384, 6), "5044132")
+        self.assertEquals(_convert_base_10_int_to_base_n_string(
+            29394, 2), "111001011010010")
