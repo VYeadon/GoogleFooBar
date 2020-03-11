@@ -42,4 +42,15 @@ Solution.solution({"1.1.2", "1.0", "1.3.3", "1.0.12", "1.0.2"})
 Output:
     1.0,1.0.2,1.0.12,1.1.2,1.3.3
 
-Constrai
+Constraints
+===========
+
+Python
+======
+Your code will run inside a Python 2.7.13 sandbox. All tests will be run by calling the solution() function.
+
+Standard libraries are supported except for bz2, crypt, fcntl, mmap, pwd, pyexpat, select, signal, termios, thread, time, unicodedata, zipimport, zlib.
+
+Input/output operations are not allowed.
+
+Your solution must be under 32000 characters in length including new lines and and other non-printing characters.
